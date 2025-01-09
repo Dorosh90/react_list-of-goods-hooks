@@ -17,7 +17,7 @@ export const goodsFromServer = [
 ];
 
 enum SortType {
-  ALPHABIT = 'alphabet',
+  ALPHABET = 'alphabet',
   LENGTH = 'length',
   DEFAULT_VALUE = '',
 }
@@ -31,7 +31,7 @@ function getPreparedGoods(
   goods: string[],
   { sortField, reverse }: FilterParam,
 ) {
-  let preparedGoods = [...goods];
+  const preparedGoods = [...goods];
 
   if (sortField) {
     preparedGoods.sort((good1, good2) => {
@@ -39,7 +39,7 @@ function getPreparedGoods(
       const value2 = good2;
 
       switch (sortField) {
-        case SortType.ALPHABIT:
+        case SortType.ALPHABET:
           return value1.localeCompare(value2);
 
         case SortType.LENGTH:
@@ -52,7 +52,7 @@ function getPreparedGoods(
   }
 
   if (reverse) {
-    preparedGoods = preparedGoods.toReversed();
+    preparedGoods.reverse();
   }
 
   return preparedGoods;
@@ -70,9 +70,9 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={classNames('button is-info', {
-            'is-light': SortType.ALPHABIT !== sortField,
+            'is-light': SortType.ALPHABET !== sortField,
           })}
-          onClick={() => setSortField(SortType.ALPHABIT)}
+          onClick={() => setSortField(SortType.ALPHABET)}
         >
           Sort alphabetically
         </button>
